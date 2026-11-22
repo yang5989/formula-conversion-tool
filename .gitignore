@@ -1,0 +1,51 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- 模型缓存（体积大，首次运行自动下载）----
+models/
+*.onnx
+*.pth
+*.pt
+*.bin
+*.safetensors
+.cache/
+
+# ---- 打包产物 ----
+*.spec
+*.exe
+*.dll
+
+# ---- 测试产物 ----
+testimgs/*.png
+!testimgs/.gitkeep
+*.log
+p2t_results.json
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# ---- 本地配置 ----
+config.local.*
+
+# ---- 本机专用启动器（含本机绝对路径，不能推）----
+启动.lnk
+启动.bat
+启动.cmd
+启动.ps1
