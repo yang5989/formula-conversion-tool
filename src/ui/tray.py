@@ -59,7 +59,18 @@ class TrayIcon(QObject):
 
     def __init__(self, icon_path: str | None = None):
         super().__init__()
-        icon = QIcon(icon_path) if icon_path else make_default_icon()
+        if icon_path:
+            icon = QIcon(icon_path)
+        else:
+            # 优先用 assets 里的图标文件，没有才程序化绘制
+            icon = None
+            try:
+                from ..icon import get_app_icon
+                icon = get_app_icon()
+            except Exception:
+                icon = None
+            if icon is None or icon.isNull():
+                icon = make_default_icon()
         self._tray = QSystemTrayIcon(icon)
         self._tray.setToolTip('Formula Conversion Tool · 公式秒转')
         self._build_menu()

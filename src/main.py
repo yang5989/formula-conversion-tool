@@ -28,6 +28,14 @@ def main():
         from PySide6.QtGui import QFont
         from PySide6.QtWidgets import QApplication
 
+        # ⚠️ 必须在 QApplication 创建【之前】设置 AppUserModelID，
+        # 否则 Windows 会把窗口归到 pythonw.exe 名下，任务栏显示 Python 图标。
+        try:
+            from src.taskbar import set_taskbar_appid
+            set_taskbar_appid()
+        except Exception:
+            pass
+
         QApplication.setHighDpiScaleFactorRoundingPolicy(
             Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
         )
@@ -35,6 +43,13 @@ def main():
         app = QApplication(sys.argv)
         app.setApplicationName('Formula Conversion Tool')
         app.setQuitOnLastWindowClosed(True)
+
+        # 程序图标：影响任务栏、Alt+Tab 切换器
+        try:
+            from src.icon import get_app_icon
+            app.setWindowIcon(get_app_icon())
+        except Exception:
+            pass
 
         f = QFont()
         f.setFamilies(['Microsoft YaHei UI', 'Segoe UI', 'sans-serif'])

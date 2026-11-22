@@ -49,8 +49,14 @@ class SplashScreen(QWidget):
         # Qt.Tool 让它不占任务栏，但保持可被其他窗口覆盖。
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool)
         self.setAttribute(Qt.WA_TranslucentBackground, False)
-        self.setFixedSize(420, 210)
+        self.setFixedSize(440, 240)
         self.setStyleSheet('background:#0d1117;')
+
+        try:
+            from ..icon import get_app_icon
+            self.setWindowIcon(get_app_icon())
+        except Exception:
+            pass
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(34, 30, 34, 26)

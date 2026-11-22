@@ -160,6 +160,13 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle('Formula Conversion Tool')
         self.resize(760, 700)
+
+        # 窗口图标（标题栏左上角）
+        try:
+            from ..icon import get_window_icon
+            self.setWindowIcon(get_window_icon())
+        except Exception:
+            pass
         self._current: Optional[Image.Image] = None
         self._worker: Optional[RecognizeWorker] = None
         self.history = History()
